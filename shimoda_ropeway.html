@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>下田纜車 Shimoda Ropeway</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Serif+TC:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#1c1a17;--ink2:#3a3730;--muted:#8a857c;
+  --cream:#f7f4ee;--warm:#ede8df;
+  --green:#1a5c42;--gold:#c8a84b;--rust:#8b4a2a;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+/* HERO */
+.hero{
+  position:relative;min-height:100vh;
+  background:url('images/hero.png') center/cover no-repeat;
+  display:flex;align-items:flex-end;overflow:hidden;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(8,18,12,0.95) 0%,rgba(8,18,12,0.45) 55%,transparent 100%);
+}
+.hero-issue{position:absolute;top:2rem;left:2rem;z-index:2;text-align:left}
+.hero-issue span{display:block;font-size:9px;letter-spacing:4px;color:rgba(255,255,255,0.4);text-transform:uppercase}
+.hero-issue strong{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:rgba(255,255,255,0.65);display:block;line-height:1.1}
+.hero-inner{position:relative;z-index:2;padding:0 2.5rem 3rem;width:100%;display:flex;flex-direction:column;align-items:flex-end;text-align:right}
+.hero-tag{display:inline-block;font-size:9px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;border:1px solid rgba(200,168,75,0.4);padding:5px 16px;margin-bottom:1.4rem}
+.hero-title{font-family:'Noto Serif TC',serif;font-size:clamp(52px,10vw,108px);font-weight:300;color:#fff;line-height:0.95;letter-spacing:-2px;margin-bottom:1.2rem;text-align:right}
+.hero-rule{width:48px;height:1px;background:var(--gold);margin-bottom:1rem;margin-left:auto}
+.hero-sub{font-size:12px;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:2rem;text-align:right;line-height:1.8}
+.hero-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:13px;letter-spacing:3px;color:#2a1a00;
+  cursor:pointer;border:none;background:var(--gold);
+  padding:14px 32px;border-radius:2px;
+  text-decoration:none;font-weight:500;
+  transition:opacity 0.2s;
+}
+.hero-cta:hover{opacity:0.85}
+
+/* INTRO */
+.intro{background:#fff;display:grid;grid-template-columns:180px 1px 1fr}
+.intro-aside{padding:3rem 2rem;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;text-align:right}
+.intro-aside span{font-size:9px;letter-spacing:5px;color:var(--muted);text-transform:uppercase}
+.intro-aside strong{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--green);margin-top:8px;line-height:1;display:block}
+.intro-div{background:linear-gradient(to bottom,transparent,var(--gold),transparent);margin:2rem 0}
+.intro-body{padding:3rem 3rem 3rem 2.5rem}
+.intro-body p{font-size:15px;line-height:2.2;color:var(--ink2);max-width:520px}
+.intro-body p+p{margin-top:1rem}
+.drop::first-letter{font-family:'Cormorant Garamond',serif;font-size:58px;font-weight:300;line-height:0.8;float:left;margin:8px 10px 0 0;color:var(--green)}
+
+/* MAP */
+.map-sec{background:var(--warm);padding:4rem 3.5rem}
+.kicker{font-size:9px;letter-spacing:5px;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+.sec-title{font-family:'Noto Serif TC',serif;font-size:clamp(22px,3.5vw,32px);font-weight:400;color:var(--ink);margin-bottom:1.8rem;line-height:1.3}
+.title-bar{display:flex;align-items:center;gap:14px;margin-bottom:1.8rem}
+.title-bar::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--gold),transparent)}
+.map-img{max-width:100%;border-radius:4px;overflow:hidden;display:block}
+.map-img img{width:100%;height:auto;display:block}
+
+/* SEASONS */
+.seasons{background:#fff;padding:4rem 3.5rem}
+.seasons-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.stabs{display:flex;border-bottom:1px solid #e0dbd2}
+.stab{
+  font-family:'Noto Serif TC',serif;font-size:17px;font-weight:400;
+  padding:8px 26px 11px;cursor:pointer;border:none;background:none;
+  color:var(--muted);letter-spacing:2px;position:relative;transition:color 0.25s;
+}
+.stab::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--green);transform:scaleX(0);transition:transform 0.25s}
+.stab.active{color:var(--green)}
+.stab.active::after{transform:scaleX(1)}
+.spanel{display:none;animation:fi 0.4s ease}
+.spanel.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.flower-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:2rem}
+.fcard{border-radius:4px;overflow:hidden;aspect-ratio:2/3;background:#eee;position:relative}
+.fcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease}
+.fcard:hover img{transform:scale(1.04)}
+.snote{margin-top:1.2rem;font-size:10px;color:var(--muted);letter-spacing:1px}
+
+/* SUMMIT */
+.summit{background:var(--ink);padding:4rem 3.5rem;color:#fff}
+.summit .kicker{color:var(--gold)}
+.summit .sec-title{color:#fff;font-family:'Noto Serif TC',serif}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.07);margin-top:2rem}
+.scard{background:var(--ink);overflow:hidden;transition:background 0.2s}
+.scard:hover{background:#252220}
+.scard-img{height:180px;overflow:hidden}
+.scard-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease}
+.scard:hover .scard-img img{transform:scale(1.04)}
+.scard-body{padding:1.4rem}
+.scard-num{font-family:'Cormorant Garamond',serif;font-size:11px;color:var(--gold);letter-spacing:3px;margin-bottom:8px}
+.scard-name{font-family:'Noto Serif TC',serif;font-size:16px;font-weight:400;margin-bottom:10px;line-height:1.4;color:#fff}
+.scard-desc{font-size:12px;line-height:1.9;color:rgba(255,255,255,0.52)}
+
+/* LOVE */
+.love{background:var(--warm);padding:4rem 3.5rem}
+.love-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:900px;margin:0 auto}
+.love-img{border-radius:4px;overflow:hidden;aspect-ratio:4/5;position:relative}
+.love-img img{width:100%;height:100%;object-fit:cover;object-position:left center;display:block}
+.love-sec-wrap{position:relative}
+.ema-deco{position:absolute;bottom:-20px;right:0px;width:90px;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15));z-index:10;pointer-events:none;transform:rotate(12deg)}
+.love-text .kicker{color:var(--gold);margin-bottom:1rem;display:block}
+.love-badge{display:inline-block;border:1px solid var(--gold);color:var(--rust);font-size:10px;padding:4px 14px;border-radius:2px;background:rgba(200,168,75,0.08);letter-spacing:1px;margin-bottom:1.2rem}
+.love-h{font-family:'Noto Serif TC',serif;font-size:clamp(36px,5vw,56px);font-weight:300;color:var(--green);line-height:1;margin-bottom:1.2rem}
+.love-desc{font-size:14px;line-height:2.1;color:var(--ink2);margin-bottom:1rem}
+.love-sub{font-size:11px;color:var(--muted);line-height:1.8}
+
+/* INFO */
+.info{background:#fff;padding:4rem 3.5rem}
+.info-inner{max-width:900px;margin:0 auto}
+.info-rule{width:100%;height:1px;background:linear-gradient(to right,var(--gold),transparent);margin-bottom:2.5rem}
+.info-cols{display:grid;grid-template-columns:1fr 1.6fr 1.2fr auto;gap:2.5rem;align-items:start}
+.ic h3{font-size:9px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e8e4dc}
+.ic p{font-size:13px;line-height:2;color:var(--ink2)}
+.hours-table{width:100%;border-collapse:collapse;font-size:13px}
+.hours-table th{font-size:9px;letter-spacing:2px;color:var(--muted);text-align:left;padding-bottom:8px;font-weight:400;border-bottom:1px solid #e8e4dc}
+.hours-table td{padding:10px 0 0;color:var(--ink2);line-height:1.6;vertical-align:top}
+.hours-table td:last-child{text-align:right;color:var(--green);font-family:'Noto Serif TC',serif;font-size:14px}
+.btn-site{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--green);background:none;border:1px solid var(--green);
+  padding:13px 28px;cursor:pointer;transition:all 0.2s;
+  text-decoration:none;white-space:nowrap;
+}
+.btn-site:hover{background:var(--green);color:#fff}
+
+footer{background:var(--ink);color:rgba(255,255,255,0.3);text-align:center;padding:2rem;font-size:10px;letter-spacing:3px}
+
+@media(max-width:768px){
+  .intro{grid-template-columns:1fr}
+  .intro-div,.intro-aside{display:none}
+  .intro-body{padding:2rem 1.5rem}
+  .hero-inner{padding:0 1.5rem 2.5rem}
+  .hero-title{font-size:clamp(48px,14vw,72px)}
+  .map-sec,.seasons,.summit,.love,.info{padding:3rem 1.5rem}
+  .flower-strip{grid-template-columns:repeat(2,1fr)}
+  .cards3{grid-template-columns:1fr}
+  .love-grid{grid-template-columns:1fr}
+  .info-cols{grid-template-columns:1fr 1fr}
+  .stab{padding:8px 16px;font-size:15px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-issue">
+    <span>静岡縣</span>
+    <strong>下田</strong>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-tag">Japan · Shizuoka · Ropeway</div>
+    <h1 class="hero-title">下田<br>纜車</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">絕美景致與綺結良綠的寢姿山自然公園</p>
+    <a class="hero-cta" href="https://ars-izukyu.triplabo.com/activity/zt/LINKTIVITY-2W1I0" target="_blank">
+      規劃行程
+    </a>
+  </div>
+</section>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-aside">
+    <span>搭乘時間</span>
+    <strong>4分<br>鐘</strong>
+  </div>
+  <div class="intro-div"></div>
+  <div class="intro-body">
+    <p class="drop">位於伊豆急行下田站前的下田纜車，搭乘約 4 分鐘即可抵達寢姿山。</p>
+    <p>山頂是花卉公園，有絕景展望台、結緣的愛染堂，四季各有不同的花卉在步道沿途盛開，隨時迎接每一位到訪的遊客。</p>
+  </div>
+</div>
+
+<!-- MAP -->
+<section class="map-sec">
+  <div class="kicker">Promenade Map</div>
+  <div class="title-bar">
+    <h2 class="sec-title">寢姿山 散步地圖</h2>
+  </div>
+  <div class="map-img">
+    <img src="images/map.png" alt="寢姿山散步地圖"/>
+  </div>
+</section>
+
+<!-- SEASONS -->
+<section class="seasons">
+  <div class="seasons-top">
+    <div>
+      <div class="kicker">Seasonal Flowers</div>
+      <h2 class="sec-title">四季花卉</h2>
+    </div>
+    <div class="stabs">
+      <button class="stab active" onclick="sw('sp',this)">春</button>
+      <button class="stab" onclick="sw('su',this)">夏</button>
+      <button class="stab" onclick="sw('au',this)">秋</button>
+      <button class="stab" onclick="sw('wi',this)">冬</button>
+    </div>
+  </div>
+
+  <div id="sp" class="spanel active">
+    <div class="flower-strip">
+      <div class="fcard"><img src="images/spring-1.jpg" alt="春季花卉"/></div>
+      <div class="fcard"><img src="images/spring-2.jpg" alt="春季花卉"/></div>
+      <div class="fcard"><img src="images/spring-3.jpg" alt="春季花卉"/></div>
+      <div class="fcard"><img src="images/spring-4.jpg" alt="春季花卉"/></div>
+    </div>
+  </div>
+  <div id="su" class="spanel">
+    <div class="flower-strip">
+      <div class="fcard"><img src="images/summer-1.jpg" alt="夏季花卉"/></div>
+      <div class="fcard"><img src="images/summer-2.jpg" alt="夏季花卉"/></div>
+      <div class="fcard"><img src="images/summer-3.jpg" alt="夏季花卉"/></div>
+      <div class="fcard"><img src="images/summer-4.jpg" alt="夏季花卉"/></div>
+    </div>
+  </div>
+  <div id="au" class="spanel">
+    <div class="flower-strip">
+      <div class="fcard"><img src="images/autumn-1.jpg" alt="秋季花卉"/></div>
+      <div class="fcard"><img src="images/autumn-2.jpg" alt="秋季花卉"/></div>
+      <div class="fcard"><img src="images/autumn-3.jpg" alt="秋季花卉"/></div>
+      <div class="fcard"><img src="images/autumn-4.jpg" alt="秋季花卉"/></div>
+    </div>
+  </div>
+  <div id="wi" class="spanel">
+    <div class="flower-strip">
+      <div class="fcard"><img src="images/winter-1.jpg" alt="冬季花卉"/></div>
+      <div class="fcard"><img src="images/winter-2.jpg" alt="冬季花卉"/></div>
+      <div class="fcard"><img src="images/winter-3.jpg" alt="冬季花卉"/></div>
+      <div class="fcard"><img src="images/winter-4.jpg" alt="冬季花卉"/></div>
+    </div>
+  </div>
+  <p class="snote">※ 花卉開放狀況可能稍有變動，請以現場為準</p>
+</section>
+
+<!-- SUMMIT -->
+<section class="summit">
+  <div class="kicker">At the Summit</div>
+  <h2 class="sec-title">山頂的優閒時光</h2>
+  <div class="cards3">
+    <div class="scard">
+      <div class="scard-img"><img src="images/restaurant.jpg" alt="THE ROYAL HOUSE"/></div>
+      <div class="scard-body">
+        <div class="scard-num">01 · 山頂餐廳</div>
+        <div class="scard-name">THE ROYAL HOUSE</div>
+        <div class="scard-desc">延續「THE ROYAL EXPRESS」的設計美學，在寢姿山也能感受細膩工藝。</div>
+      </div>
+    </div>
+    <div class="scard">
+      <div class="scard-img"><img src="images/viewpoint.jpg" alt="絕美展望台"/></div>
+      <div class="scard-body">
+        <div class="scard-num">02 · 絕景展望台</div>
+        <div class="scard-name">俯瞰伊豆七島</div>
+        <div class="scard-desc">被譽為「伊豆三景」之一，從這裡將眼前整片海景一覽無遺。</div>
+      </div>
+    </div>
+    <div class="scard">
+      <div class="scard-img"><img src="images/kurofune.jpg" alt="黑船監視所"/></div>
+      <div class="scard-body">
+        <div class="scard-num">03 · 歷史遺跡</div>
+        <div class="scard-name">黑船監視所</div>
+        <div class="scard-desc">江戶幕府曾在此設置警戒小屋，日夜警戒外來船隊。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOVE -->
+<section class="love">
+  <div class="love-sec-wrap" style="position:relative;max-width:900px;margin:0 auto">
+  <div class="love-grid" style="max-width:100%;margin:0">
+    <div class="love-img">
+      <img src="images/aizendo.jpg" alt="愛染堂"/>
+    </div>
+    <div class="love-text">
+      <span class="kicker">結緣聖地</span>
+      <div class="love-badge">祈求良緣的能量景點</div>
+      <h2 class="love-h">愛染堂</h2>
+      <p class="love-desc">從山頂步行約 10 分鐘，即可抵達供奉以結緣聞名、掌管戀愛、良緣與求子的愛染堂。蒐集季節限定御朱印，為旅程蓋上專屬印記。</p>
+      <p class="love-sub">心型繪馬 — 在愛染明王的守護下，祈求良緣與幸福</p>
+    </div>
+  </div>
+  <img class="ema-deco" src="images/ema.png" alt="心型繪馬"/>
+  </div>
+</section>
+
+<!-- INFO -->
+<section class="info">
+  <div class="info-inner">
+    <div class="info-rule"></div>
+    <div class="info-cols">
+      <div class="ic">
+        <h3>票價</h3>
+        <p>成人　¥1,500<br>兒童　¥750</p>
+      </div>
+      <div class="ic">
+        <h3>營業時間</h3>
+        <table class="hours-table">
+          <thead>
+            <tr>
+              <th>日期</th>
+              <th style="text-align:right">開放時間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>03/16 ～ 10/15</td>
+              <td>08:45 ～ 17:00</td>
+            </tr>
+            <tr>
+              <td>10/16 ～ 03/15</td>
+              <td>08:45 ～ 16:45</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ic">
+        <h3>地址</h3>
+        <p>415-0035<br>靜岡縣下田市<br>東本郷 1-3-2</p>
+      </div>
+      <div class="ic" style="display:flex;align-items:flex-end;padding-top:1rem">
+        <a class="btn-site" href="https://ropeway.co.jp" target="_blank">官方網站 ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© Shimoda Ropeway · 下田纜車 · 靜岡縣下田市東本郷 1-3-2</footer>
+
+<script>
+let cur=0;
+const ss=['sp','su','au','wi'];
+function sw(id,btn){
+  document.querySelectorAll('.spanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  cur=ss.indexOf(id);
+  clearInterval(tmr);
+}
+let tmr=setInterval(()=>{
+  cur=(cur+1)%4;
+  const tabs=document.querySelectorAll('.stab');
+  sw(ss[cur],tabs[cur]);
+},5000);
+</script>
+</body>
+</html>
